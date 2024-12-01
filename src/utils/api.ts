@@ -3,7 +3,7 @@ export const login = async (
   password: string
 ): Promise<string | null> => {
   try {
-    const response = await fetch("http://localhost:3000/api/user/login", {
+    const response = await fetch("https://api-74opign4ma-uc.a.run.app/api/admin/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,6 +29,7 @@ interface PostData {
   post_type: string;
   category: string;
   source: string;
+  image?:string;
 }
 
 export const createPost = async (
@@ -36,7 +37,7 @@ export const createPost = async (
   token: string
 ): Promise<void> => {
   try {
-    const response = await fetch("http://localhost:3000/api/post/create", {
+    const response = await fetch("https://app-74opign4ma-uc.a.run.app/api/post/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,3 +78,43 @@ export const logout = async (token: string): Promise<string | null> => {
     return null;
   }
 };
+
+interface Blogdata {
+  title:string;
+  subtitle:string;
+  language:string;
+  description:string;
+  image:string|null;
+  url:string;
+  thumbnail:string;
+  keywords:string;
+}
+
+export const CreateBlog=async(blogData:Blogdata,token:string):Promise<void>=>{
+  try {
+    console.log(token)
+    const response = await fetch("https://api-74opign4ma-uc.a.run.app/api/admin/create_blog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`, // Include the token in the Authorization header
+      },
+    
+      body: JSON.stringify(blogData),
+    });
+    const data = response.json();
+    
+    if (!response.ok) {
+      throw new Error("Failed to create blog");
+    }
+
+    // console.log("Post created successfully");
+    alert("Blog createed succesfully");
+    console.log(data,"asdf")
+  } catch (error) {
+    console.log("Create blog error:", error);
+  }
+
+}
+
+

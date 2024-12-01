@@ -29,11 +29,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    setIsLoggedIn(!!token); // Set isLoggedIn based on the presence of the token
+    setIsLoggedIn(!!token);
+    console.log(token) // Set isLoggedIn based on the presence of the token
   }, []);
 
   const togglesidebar =()=>{
-    setSidebar(!isopenSidebar)
+    setSidebar((prev)=>!prev)
   }
 
  

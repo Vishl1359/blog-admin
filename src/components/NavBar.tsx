@@ -23,11 +23,8 @@ const NavBar: React.FC = () => {
     <Sidebar isOpen={isopenSidebar} />
       <div
         className="flex items-center cursor-pointer"
-        onClick={() => {
-         
-          router.push("/");
-          
-        }}
+       
+
       >
         {/* <img src={logo_url} alt="Logo" className="w-8 h-8" /> */}
         <button

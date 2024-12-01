@@ -1,15 +1,14 @@
-'use client'
 import { AuthProvider, useAuth} from "@/context/AuthContext";
 
 import Image from "next/image";
 
 export default function Home(){
 
- const {isopenSidebar}=useAuth()
 
     return (
     <AuthProvider>
-      <main className={`flex min-h-screen flex-col p-24  ${isopenSidebar?"ml-64":""}  `}>
+
+      <main className={`flex max-h-full flex-col p-24   `}>
         <div className="p-8 ">
           <h1 className="text-2xl font-semibold text-gray-800">
             Welcome to the Admin Panel

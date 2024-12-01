@@ -16,7 +16,7 @@ interface FormData {
 }
 
 const Page: React.FC = () => {
-  const types = ["text","image", "both"];
+  const types = ["text", "both"];
   
   const categories = [
     "Language",
@@ -46,7 +46,7 @@ const Page: React.FC = () => {
     const {name,value}=e.target
   //  limit text and discription character
     if(name==="title" && value.length >=30){
-      toast("title can not exceed 30 charcter",{
+      toast("Title can not exceed 30 charcter",{
         type:"error",
         position: "bottom-center",
         autoClose: 5000,
@@ -59,7 +59,7 @@ const Page: React.FC = () => {
       })
     }
     if(name==="description"&&formData.post_type==="image"&&value.length>=300  ){
-     toast("discription can not exceed 300 charcter",{
+     toast("Discription can not exceed 300 charcter",{
         type:"error",
         position: "bottom-center",
         autoClose: 5000,
@@ -96,8 +96,10 @@ const Page: React.FC = () => {
     e.preventDefault();
 
     const token = localStorage.getItem("authToken");
+    console.log(token,"token....")
     if (token) {
       const response = await createPost(formData, token);
+      console.log(response,"response")
     } else {
       alert("Error");
     }
@@ -160,7 +162,7 @@ const Page: React.FC = () => {
             ))}
           </select>
         </div>
-          {formData.post_type==="text" || formData.post_type==="both"?(
+          {formData.post_type==="both"?(
                     <div className="mb-6">
 
              <label
@@ -181,65 +183,46 @@ const Page: React.FC = () => {
              required
              className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
              />
+                              <label
+            htmlFor="image"
+            className="block text-gray-800 font-semibold mb-2"
+          >
+            Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            placeholder="Enter title"
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
                      </div>
 
-          ):formData.post_type === "image" || formData.post_type==="both"?(
-            <div className="mb-6">
-                 <label
-            htmlFor="image"
-            className="block text-gray-800 font-semibold mb-2"
-          >
-            image
-          </label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="Enter title"
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-            </div>
           ):(
             <div className="mb-6">
-            <label
-            htmlFor="title"
-            className="block text-gray-800 font-semibold mb-2"
-          >
-            Title
-          </label>
-          
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            maxLength={30}
-            onChange={handleChange}
-            placeholder="Enter title"
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-                 <label
-            htmlFor="image"
-            className="block text-gray-800 font-semibold mb-2"
-          >
-            image
-          </label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="Enter title"
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-            
-                    </div>
+                <label
+             htmlFor="title"
+             className="block text-gray-800 font-semibold mb-2"
+           >
+             Title
+           </label>
+           
+           <input
+             type="text"
+             id="title"
+             name="title"
+             value={formData.title}
+             maxLength={30}
+             onChange={handleChange}
+             placeholder="Enter title"
+             required
+             className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+             />
+
+            </div>
           )}
          
                 <ToastContainer
